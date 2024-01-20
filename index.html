@@ -17,15 +17,17 @@
             height: 100vh;
         }
 
-        #calculator {
+        .calculator-container {
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             width: 300px;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
         }
 
-        input {
+        input, button {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -43,29 +45,78 @@
             font-size: 16px;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         button:hover {
             background-color: #45a049;
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="calculator">
+    <div class="calculator-container" id="page1">
         <h2>加法计算器</h2>
         <input type="number" id="num1" placeholder="输入第一个数字">
+        <button onclick="nextPage()">下一步</button>
+    </div>
+
+    <div class="calculator-container" id="page2" style="display: none;">
+        <h2>加法计算器</h2>
         <input type="number" id="num2" placeholder="输入第二个数字">
         <button onclick="calculate()">计算</button>
-        <h3 id="result">结果：</h3>
-
-        <script>
-            function calculate() {
-                var num1 = parseFloat(document.getElementById("num1").value);
-                var num2 = parseFloat(document.getElementById("num2").value);
-                var result = num1 + num2;
-                document.getElementById("result").innerText = "结果：" + result;
-            }
-        </script>
     </div>
+
+    <div class="calculator-container" id="page3" style="display: none;">
+        <h2>加法计算器</h2>
+        <h3 id="result" style="margin-bottom: 20px; display: none;">结果：</h3>
+        <button onclick="reset()">重新计算</button>
+    </div>
+
+    <script>
+        function nextPage() {
+            document.getElementById("page1").style.animation = "fadeOut 0.5s forwards";
+            setTimeout(function() {
+                document.getElementById("page1").style.display = "none";
+                document.getElementById("page2").style.display = "block";
+                document.getElementById("page2").style.animation = "fadeIn 0.5s forwards";
+            }, 500);
+        }
+
+        function calculate() {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var result = num1 + num2;
+            document.getElementById("result").innerText = "结果：" + result;
+            document.getElementById("result").style.display = "block";
+
+            document.getElementById("page2").style.animation = "fadeOut 0.5s forwards";
+            setTimeout(function() {
+                document.getElementById("page2").style.display = "none";
+                document.getElementById("page3").style.display = "block";
+                document.getElementById("page3").style.animation = "fadeIn 0.5s forwards";
+            }, 500);
+        }
+
+        function reset() {
+            document.getElementById("page3").style.animation = "fadeOut 0.5s forwards";
+            setTimeout(function() {
+                document.getElementById("page3").style.display = "none";
+                document.getElementById("page1").style.display = "block";
+                document.getElementById("page1").style.animation = "fadeIn 0.5s forwards";
+                document.getElementById("num1").value = "";
+                document.getElementById("num2").value = "";
+                document.getElementById("result").style.display = "none";
+            }, 500);
+        }
+    </script>
 </body>
 </html>
