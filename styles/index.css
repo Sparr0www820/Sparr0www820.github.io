@@ -1,48 +1,123 @@
+:root {
+	--header-background-color: #13a2ce;
+	--footer-background-color: #333;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+}
+
 body {
 	font-family: 'Montserrat', sans-serif;
+
 	margin: 0;
 	padding: 0;
+
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+
+	background-image: url('/img/background.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .header {
-	background-color: #3498db;
-	color: #fff;
-	padding: 20px;
+	background-color: var(--header-background-color);
+	color: rgb(255, 255, 255);
+	padding: 1.25em;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-
-h1,
-h2 {
-	margin: 5px 0;
 }
 
 .main-content {
 	flex: 1;
 	display: flex;
 	justify-content: space-between;
-	padding: 20px;
+	flex-direction: row;
+	margin: 1em;
+}
+
+.left-content, .right-content {
+	padding: 1.25em;
+	margin: 0.25em;
+	border: none;
+	background-color: rgba(255, 255, 255, 0.8);
 }
 
 .left-content {
-	flex: 0.6;
-	padding: 10px;
-	border: 1px solid #ddd;
+	flex-grow: 0.7;
 }
 
 .right-content {
-	flex: 0.4;
-	padding: 10px;
-	border: 1px solid #ddd;
+	flex-grow: 0.3;
 }
 
 .footer {
-	background-color: #333;
+	background-color: var(--footer-background-color);
 	color: #fff;
-	padding: 10px;
+	font-size: 12px;
+	padding: 20px;
 	text-align: center;
+	display: flex;
+	justify-content: center;
+}
+
+.footer-centered {
+	position: absolute;
+}
+
+.footer-hidden {
+	margin-left: auto;
+	color: var(--footer-background-color);
+	transition: color 0.5s;
+}
+
+.footer-hidden:hover {
+	color: #fff;
+}
+
+.h2-title {
+	margin-bottom: 0px;
+}
+
+.divider {
+	background-color: #aaa;
+	height: 1px;
+	margin: 10px auto;
+}
+
+.logcardlist {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.logcard {
+	background-color: rgba(189, 93, 14, 0.15);
+
+	border: 1px solid #000;
+	border-width: 1px;
+	border-color: #aaa;
+
+	margin: 0.625em;
+	padding: 0.625em;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.logtime {
+	margin: 5px;
+}
+
+.logcontent {
+	margin: 5px;
+	margin-left: auto;
+
+	line-height: 1.5em;
+
+	overflow: hidden;
+	text-align: right;
 }
