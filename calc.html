@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<title>A+B Calculator</title>
+	<link rel="stylesheet" href="styles/calc.css">
+</head>
+<body>
+	<div class="calculator-container" id="page1">
+		<h2>A+B Calculator</h2>
+		<input type="number" id="num1" placeholder="Please enter number A">
+		<button onclick="nextPage()">Next step</button>
+	</div>
+
+	<div class="calculator-container" id="page2" style="display: none;">
+		<h2>A+B Calculator</h2>
+		<input type="number" id="num2" placeholder="Please enter number B">
+		<button onclick="calculate()">Calculate!</button>
+	</div>
+
+	<div class="calculator-container" id="page3" style="display: none;">
+		<h2>A+B Calculator</h2>
+		<h3 id="result" style="margin-bottom: 20px; display: none;">A + B = </h3>
+		<button onclick="reset()">Restart</button>
+	</div>
+
+	<script>
+		function nextPage() {
+			document.getElementById("page1").style.animation = "fadeOut 0.5s forwards";
+			setTimeout(function() {
+				document.getElementById("page1").style.display = "none";
+				document.getElementById("page2").style.display = "block";
+				document.getElementById("page2").style.animation = "fadeIn 0.5s forwards";
+			}, 500);
+		}
+
+		function calculate() {
+			var num1 = parseFloat(document.getElementById("num1").value);
+			var num2 = parseFloat(document.getElementById("num2").value);
+			var result = num1 + num2;
+			document.getElementById("result").innerText = "A + B = " + result;
+			document.getElementById("result").style.display = "block";
+
+			document.getElementById("page2").style.animation = "fadeOut 0.5s forwards";
+			setTimeout(function() {
+				document.getElementById("page2").style.display = "none";
+				document.getElementById("page3").style.display = "block";
+				document.getElementById("page3").style.animation = "fadeIn 0.5s forwards";
+			}, 500);
+		}
+
+		function reset() {
+			document.getElementById("page3").style.animation = "fadeOut 0.5s forwards";
+			setTimeout(function() {
+				document.getElementById("page3").style.display = "none";
+				document.getElementById("page1").style.display = "block";
+				document.getElementById("page1").style.animation = "fadeIn 0.5s forwards";
+				document.getElementById("num1").value = "";
+				document.getElementById("num2").value = "";
+				document.getElementById("result").style.display = "none";
+			}, 500);
+		}
+	</script>
+</body>
+</html>
