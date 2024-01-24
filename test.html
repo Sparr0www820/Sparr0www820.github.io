@@ -1,27 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relative Positioning</title>
-    <style>
-        .container {
-            position: relative;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #time-container {
+  font-size: 32px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  text-align: center;
+  margin: 20px;
+}
 
-        .relative-element {
-            position: relative; /* 设置相对定位 */
-            top: 20px; /* 相对于其正常位置向下偏移 20 像素 */
-            left: 30px; /* 相对于其正常位置向右偏移 30 像素 */
-            background-color: #ccc;
-            padding: 10px;
-        }
-    </style>
+.animated {
+  animation: colorChange 1s infinite alternate;
+}
+
+@keyframes colorChange {
+  from {
+    color: #333;
+  }
+  to {
+    color: #ff5733; /* 或者你喜欢的颜色 */
+  }
+}
+  </style>
+  <title>Beautiful Time Display</title>
 </head>
 <body>
-    <div class="container">
-        <p>This is the container.</p>
-        <div class="relative-element">Relative Element</div>
-    </div>
+  <div id="time-container">
+    <span id="year" class="animated"></span>年
+    <span id="month" class="animated"></span>月
+    <span id="day" class="animated"></span>日
+    <span id="hour" class="animated"></span>:
+    <span id="minute" class="animated"></span>:
+    <span id="second" class="animated"></span>
+  </div>
+  <script>
+    function updateClock() {
+  var now = new Date();
+
+  var year = now.getFullYear();
+  var month = now.getMonth() + 1; // getMonth() 返回的是 0 到 11，所以需要加 1
+  var day = now.getDate();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  var second = now.getSeconds();
+
+  document.getElementById('year').textContent = year;
+  document.getElementById('month').textContent = padNumber(month);
+  document.getElementById('day').textContent = padNumber(day);
+  document.getElementById('hour').textContent = padNumber(hour);
+  document.getElementById('minute').textContent = padNumber(minute);
+  document.getElementById('second').textContent = padNumber(second);
+
+  setTimeout(updateClock, 1000); // 每秒更新一次
+}
+
+function padNumber(number) {
+  return number < 10 ? '0' + number : number;
+}
+
+// 初次加载页面时调用一次，开始更新时间
+updateClock();
+
+  </script>
 </body>
 </html>

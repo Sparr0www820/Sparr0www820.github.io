@@ -48,11 +48,11 @@ body {
 }
 
 .left-content {
-	flex-grow: 0.7;
+	flex: 0.6;
 }
 
 .right-content {
-	flex-grow: 0.3;
+	flex: 0.4;
 }
 
 .footer {
@@ -114,10 +114,8 @@ body {
 
 .logcontent {
 	margin: 5px;
-	margin-left: auto;
 
 	line-height: 1.5em;
-
-	overflow: hidden;
+	margin-left: auto;
 	text-align: right;
 }
