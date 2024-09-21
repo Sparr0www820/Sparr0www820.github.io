@@ -82,11 +82,27 @@ textarea {
 	margin-top: 10px;
 }
 
-footer {
+
+.footer {
 	background-color: var(--footer-background-color);
 	color: #fff;
 	font-size: 12px;
-	padding: 10px;
+	padding: 20px;
 	text-align: center;
-	margin-top: auto;
+	display: flex;
+	justify-content: center;
+}
+
+.footer-centered {
+	position: absolute;
+}
+
+.footer-hidden {
+	margin-left: auto;
+	color: var(--footer-background-color);
+	transition: color 0.5s;
+}
+
+.footer-hidden:hover {
+	color: #fff;
 }
