@@ -24,13 +24,20 @@ let params = '';
 
 // Update prompt when a button is clicked
 function toggleWord(word, category) {
-    if (promptText.includes(word)) {
-        promptText = promptText.replace(`, ${word}`, '').replace(word, '');
+    const wordWithComma = `, ${word}`;
+    const wordWithoutComma = word;
+
+    if (promptText.includes(wordWithComma)) {
+        promptText = promptText.replace(wordWithComma, '');
+    } else if (promptText.includes(wordWithoutComma)) {
+        promptText = promptText.replace(wordWithoutComma, '');
     } else {
-        promptText += promptText ? `, ${word}` : word;
+        promptText += promptText ? wordWithComma : wordWithoutComma;
     }
-    promptBox.value = promptText + params;
+
+    promptBox.innerText = promptText + params; // 使用innerText更新内容
 }
+
 
 // Generate buttons dynamically for each category
 for (let category in categories) {
