@@ -22,14 +22,27 @@ const copyBtn = document.getElementById('copyBtn');
 let promptText = '';
 let params = '';
 
-// Update prompt when a button is clicked
-function toggleWord(word, category) {
-    if (promptText.includes(word)) {
-        promptText = promptText.replace(`, ${word}`, '').replace(word, '');
-    } else {
-        promptText += promptText ? `, ${word}` : word;
-    }
-    promptBox.value = promptText + params;
+// Function to create a tag with a remove button
+function createTag(word) {
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.innerText = word;
+    
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-btn';
+    removeBtn.innerText = '×';
+    removeBtn.onclick = function() {
+        promptBox.removeChild(tag);
+    };
+    
+    tag.appendChild(removeBtn);
+    return tag;
+}
+
+// Function to add a word to the prompt box
+function addWordToPrompt(word) {
+    const tag = createTag(word);
+    promptBox.appendChild(tag);
 }
 
 // Generate buttons dynamically for each category
@@ -38,15 +51,19 @@ for (let category in categories) {
     categories[category].forEach(word => {
         const button = document.createElement('button');
         button.innerText = word;
-        button.onclick = () => toggleWord(word, category);
+        button.onclick = () => addWordToPrompt(word);
         container.appendChild(button);
     });
 }
 
 // Copy prompt text to clipboard
 copyBtn.addEventListener('click', () => {
-    promptBox.select();
-    document.execCommand('copy');
+    const range = document.createRange();
+    range.selectNode(promptBox);
+    window.getSelection().removeAllRanges(); // Clear any existing selections
+    window.getSelection().addRange(range); // Select the prompt text
+    document.execCommand('copy'); // Copy selected text to clipboard
+    window.getSelection().removeAllRanges(); // Clear selection after copying
 });
 
 // Toggle parameter buttons
