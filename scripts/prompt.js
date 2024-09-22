@@ -14,7 +14,7 @@ const categories = {
 	time_of_day: ["sunset", "noon", "night", "dawn"],
 	scenes: ["classroom", "forest", "city street", "rooftop", "bedroom", "café", "park", "library",
 		"train station", "festival", "garden, flowers", "beach, seaside", "cyberpunk, futuristic city", "indoor", "public toilet", 'outdoors', "liquor bar counter", "in spring, cherry blossom", "church", "indoor pool", "music stage", "onsen", "pool"],
-    view: ["blurry foreground", "close-up", "cowboy shot", "dutch angle"]
+    view: ["blurry foreground", "close-up", "cowboy shot", "dutch angle", "background blur"]
 };
 
 const promptBox = document.getElementById('promptBox');
@@ -63,7 +63,7 @@ document.getElementById('hd-toggle').addEventListener('click', () => {
     } else {
         params += ' -n';
     }
-    promptBox.textContent = promptText + params; // 使用 textContent 更新
+    promptBox.textContent = promptText + params;
 });
 
 document.getElementById('landscape-toggle').addEventListener('click', () => {
@@ -72,24 +72,24 @@ document.getElementById('landscape-toggle').addEventListener('click', () => {
     } else {
         params += ' -l';
     }
-    promptBox.textContent = promptText + params; // 使用 textContent 更新
+    promptBox.textContent = promptText + params;
 });
 
 // 其他参数更新
 document.getElementById('seed').addEventListener('input', (e) => {
     params = params.replace(/ -s \d+/, '');
     params += ` -s ${e.target.value}`;
-    promptBox.textContent = promptText + params; // 使用 textContent 更新
+    promptBox.textContent = promptText + params;
 });
 
 document.getElementById('model').addEventListener('change', (e) => {
     params = params.replace(/ -c \d+/, '');
     params += ` -c ${e.target.value}`;
-    promptBox.textContent = promptText + params; // 使用 textContent 更新
+    promptBox.textContent = promptText + params;
 });
 
 document.getElementById('h').addEventListener('input', (e) => {
     params = params.replace(/ -h \d+(\.\d+)?/, '');
     params += ` -h ${e.target.value}`;
-    promptBox.textContent = promptText + params; // 使用 textContent 更新
+    promptBox.textContent = promptText + params;
 });
