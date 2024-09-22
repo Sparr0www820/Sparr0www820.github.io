@@ -22,7 +22,7 @@ const copyBtn = document.getElementById('copyBtn');
 let promptText = '';
 let params = '';
 
-// Update prompt when a button is clicked
+// 更新 prompt 当点击按钮时
 function toggleWord(word, category) {
     const wordWithComma = `, ${word}`;
     const wordWithoutComma = word;
@@ -35,11 +35,11 @@ function toggleWord(word, category) {
         promptText += promptText ? wordWithComma : wordWithoutComma;
     }
 
-    promptBox.innerText = promptText + params; // 使用innerText更新内容
+    // 更新文本框内容，使用 textContent 而不是 value
+    promptBox.textContent = promptText + params;
 }
 
-
-// Generate buttons dynamically for each category
+// 生成按钮动态
 for (let category in categories) {
     const container = document.getElementById(category);
     categories[category].forEach(word => {
@@ -50,20 +50,20 @@ for (let category in categories) {
     });
 }
 
-// Copy prompt text to clipboard
+// 复制提示文本到剪贴板
 copyBtn.addEventListener('click', () => {
-    promptBox.select();
+    promptBox.select(); 
     document.execCommand('copy');
 });
 
-// Toggle parameter buttons
+// 切换参数按钮
 document.getElementById('hd-toggle').addEventListener('click', () => {
     if (params.includes('-n')) {
         params = params.replace(' -n', '');
     } else {
         params += ' -n';
     }
-    promptBox.value = promptText + params;
+    promptBox.textContent = promptText + params; // 使用 textContent 更新
 });
 
 document.getElementById('landscape-toggle').addEventListener('click', () => {
@@ -72,25 +72,24 @@ document.getElementById('landscape-toggle').addEventListener('click', () => {
     } else {
         params += ' -l';
     }
-    promptBox.value = promptText + params;
+    promptBox.textContent = promptText + params; // 使用 textContent 更新
 });
 
-document.getElementById('scale').addEventListener('input', (e) => {
+// 其他参数更新
+document.getElementById('seed').addEventListener('input', (e) => {
     params = params.replace(/ -s \d+/, '');
     params += ` -s ${e.target.value}`;
-    promptBox.value = promptText + params;
+    promptBox.textContent = promptText + params; // 使用 textContent 更新
 });
 
 document.getElementById('model').addEventListener('change', (e) => {
     params = params.replace(/ -c \d+/, '');
     params += ` -c ${e.target.value}`;
-    promptBox.value = promptText + params;
+    promptBox.textContent = promptText + params; // 使用 textContent 更新
 });
 
 document.getElementById('h').addEventListener('input', (e) => {
     params = params.replace(/ -h \d+(\.\d+)?/, '');
     params += ` -h ${e.target.value}`;
-    promptBox.value = promptText + params;
+    promptBox.textContent = promptText + params; // 使用 textContent 更新
 });
-
-
